@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Samsung A5",
+        "type": "Smartphone"
+    },
+    {
+        "name": "Huawai P30 Pro",
+        "type": "Smartphone"
+    },
+    {
+        "name": "Vivo",
+        "type": "Smartphone"
+    },
+    {
+        "name": "Beanie",
+        "type": "Hat"
+    },
+    {
+        "name": "Jordans",
+        "type": "Shoes"
+    },
+    {
+        "name": "Toyota",
+        "type": "Car"
+    }
+]
