@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
 const Employee = require("./db/employee.model");
 
-//const routerEmployees = require("./routes/employees");
 const routerFilterEmployees = require("./routes/filteredEmployees");
 const routerSortingEmployees = require("./routes/sortedEmployees");
 
@@ -12,7 +11,7 @@ const routerEquipment = require("./routes/equipment");
 const routerFilterEquipment = require("./routes/filteredEquipment");
 const routerSortingEquipment = require("./routes/sortedEquipment");
 
-const routerMissingEmployees = require("./routes/missingEmployees")
+const routerAttendence = require("./routes/attendence");
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -42,7 +41,6 @@ app.use("/api/employees/:id", async (req, res, next) => {
   next();
 });
 
-// app.use("/api/emloyees", routerEmployees);
 app.use("/api/filtered", routerFilterEmployees);
 app.use("/api/sorted", routerSortingEmployees);
 
@@ -50,16 +48,16 @@ app.use("/api/equipment", routerEquipment);
 app.use("/api/equipment/filtered", routerFilterEquipment);
 app.use("/api/equipment/sorted", routerSortingEquipment);
 
-app.use("/api/attendence", routerMissingEmployees);
+app.use("/api/attendence", routerAttendence);
 
 app.get("/api/employees/", async (req, res) => {
   const employees = await EmployeeModel.find().sort({ created: "desc" });
   return res.json(employees);
 });
 
-// app.get("/api/employees/:id", (req, res) => {
-//   return res.json(req.employee);
-// }); 
+app.get("/api/employees/:id", (req, res) => {
+  return res.json(req.employee);
+}); 
 
 app.post("/api/employees/", async (req, res, next) => {
   const employee = req.body;
@@ -70,16 +68,6 @@ app.post("/api/employees/", async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-});
-
-app.put("/api/attendence/:id", async (req, res, next) => {
-  Employee.findByIdAndUpdate({_id: req.params.id}, req.body)
-    .then(() => {
-        Employee.findOne({_id: req.params.id})
-        .then((employee) => {
-            console.log(employee)
-        });
-    });
 });
   
 app.patch("/api/employees/:id", async (req, res, next) => {

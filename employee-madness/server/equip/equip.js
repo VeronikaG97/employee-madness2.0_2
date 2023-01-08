@@ -19,9 +19,9 @@ const pick = (from) => from[Math.floor(Math.random() * (from.length - 0))];
 const equipEmployees = async () => {
   await Equipment.deleteMany({});
 
-  const equipments = equipmentsFile.map((x) => ({
-    name: x.name,
-    type: x.type,
+  const equipments = equipmentsFile.map((element) => ({
+    name: element.name,
+    type: element.type,
     amount: pick(amount)
   }));
 
