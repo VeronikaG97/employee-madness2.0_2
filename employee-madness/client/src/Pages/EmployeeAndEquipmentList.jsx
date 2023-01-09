@@ -30,9 +30,13 @@ const EmployeeAndEquipmentList = () => {
   const [data, setData] = useState(null);
   const [equipmentData, setEquipmentData] = useState(null);
  
+  /*TO-DO: Fix the Toggle
+      -> try a useState (map in in EmployeeTable so that every 
+         employee has their own useState)
+      -> try to set checkbox value to useState and reade here in changeAttendence the value/use vale for the "PUT-Body"
+  */
   const changeAttendence = async (id, attendence) => {
     attendence = !attendence
-    //Toggle doesent work yet.... re-render? useEffekt?
     return fetch(`/api/attendence/${id}`, {
       method: "PUT",
       headers: 

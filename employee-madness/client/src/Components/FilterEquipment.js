@@ -37,5 +37,4 @@ const FilterEquipment = (props) => {
     );
 }
 
- 
 export default FilterEquipment;

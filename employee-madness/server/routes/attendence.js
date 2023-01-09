@@ -13,7 +13,7 @@ routerAttendence.put("/:id", async (req, res, next) => {
       .then(() => {
           Employee.findOne({_id: req.params.id})
           .then((employee) => {
-              console.log(employee)
+              console.log(employee);
           });
       });
   });

@@ -35,16 +35,7 @@ routerEquipment.patch("/:id", async (req, res, next) => {
 });
 
 routerEquipment.delete("/:id", async (req, res, next) => {
-  const deletedEquipment = await Equipment.findOneAndDelete({_id: req.params.id});
-  const newDataList = await Equipment.find({});
-  res.send(newDataList);
-  try {
-    const deleted = await req.equipment.delete();
-    return res.json(deleted);
-  } catch (err) {
-    return next(err);
-  }
-
+  Equipment.findByIdAndDelete({_id: req.params.id}, req.body)
 });
 
 module.exports = routerEquipment;

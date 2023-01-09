@@ -33,7 +33,6 @@ app.use("/api/equipment/sorted", routerSortingEquipment);
 
 app.use("/api/attendence", routerAttendence);
 
-
 const main = async () => {
   await mongoose.connect(MONGO_URL);
 
