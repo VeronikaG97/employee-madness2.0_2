@@ -79,24 +79,26 @@ const EmployeeAndEquipmentList = () => {
         setLoading(false);
         const employeeData = employees;
         return employeeData;
-      })
+    });
 
     const getAllEquipmentItem = fetchEquipment(controller.signal)
       .then((equipment) => {
         setLoading(false);
-        setEquipmentData(equipment);
-      })
-      .catch((error) => {
-        if (error.name !== "AbortError") {
-          setEquipmentData(null);
-          throw error;
-        }
-      });
-
-      Promise.all([getAllEmployees, getAllEquipmentItem]).then((values) => {
-        setEmployeeData(values[0])
-        console.log(values);
-      });
+        const equipmentData = equipment;
+        return equipmentData;
+    });
+      
+    Promise.all([getAllEmployees, getAllEquipmentItem]).then((values) => {
+      setEmployeeData(values[0]);
+      setEquipmentData(values[1]);
+    })
+    .catch((error) => {
+      if (error.name !== "AbortError") {
+        setEmployeeData(null);
+        setEquipmentData(null);
+        throw error;
+      }
+    });
 
     return () => controller.abort();
   }, []);
