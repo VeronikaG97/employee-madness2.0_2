@@ -3,12 +3,12 @@ import "./EmployeeTable.css";
 import FilterEmployees from "../FilterEmployees";
 import SortEmployees from "../SortEmployees"
 
-const EmployeeTable = ({ employees, onDeleteEmp, setData, changeAttendence }) => {
+const EmployeeTable = ({ employees, onDeleteEmp, setEmployeeData, changeAttendence }) => {
   return (
     <div className="EmployeeTable">
       <h1>Employees</h1>
-      <FilterEmployees setData={setData} />
-      <SortEmployees setData={setData} />
+      <FilterEmployees setEmployeeData={setEmployeeData} />
+      <SortEmployees setEmployeeData={setEmployeeData} />
       <table>
         <thead>
           <tr>

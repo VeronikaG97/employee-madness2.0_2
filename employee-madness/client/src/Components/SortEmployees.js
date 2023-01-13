@@ -3,19 +3,19 @@ const SortEmployees = (props) => {
     const handleOnClickName = async () => {
         const nameData = await fetch("/api/sorted/name");
         const nameResult = await nameData.json();
-        props.setData(nameResult);
+        props.setEmployeeData(nameResult);
     }
 
     const handleOnClickLevel = async () => {
         const levelData = await fetch("/api/sorted/level");
         const levelResult = await levelData.json();
-        props.setData(levelResult);
+        props.setEmployeeData(levelResult);
     } 
 
     const handleOnClickPosition = async () => {
         const positionData = await fetch("/api/sorted/position");
         const positionResult = await positionData.json();
-        props.setData(positionResult);
+        props.setEmployeeData(positionResult);
     } 
 
     return ( 

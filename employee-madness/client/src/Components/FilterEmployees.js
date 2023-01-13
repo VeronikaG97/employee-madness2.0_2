@@ -7,7 +7,7 @@ const FilterEmployees = (props) => {
         }
         const nameData = await fetch(`/api/filtered/name/${e.target.value}`);
         const nameResult = await nameData.json();
-        props.setData(nameResult);
+        props.setEmployeeData(nameResult);
     }
 
     const handleOnChangeLevel = async (e) => {
@@ -16,7 +16,7 @@ const FilterEmployees = (props) => {
         }
         const levelData = await fetch(`/api/filtered/level/${e.target.value}`);
         const levelResult = await levelData.json();
-        props.setData(levelResult);
+        props.setEmployeeData(levelResult);
     }
 
     const handleOnChangePosition = async (e) => {
@@ -25,7 +25,7 @@ const FilterEmployees = (props) => {
         }
         const positionData = await fetch(`/api/filtered/position/${e.target.value}`);
         const positionResult = await positionData.json();
-        props.setData(positionResult);
+        props.setEmployeeData(positionResult);
     }
 
     return (

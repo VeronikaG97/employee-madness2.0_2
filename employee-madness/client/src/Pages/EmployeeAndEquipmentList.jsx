@@ -29,7 +29,7 @@ const deleteEquipment = (id) => {
 
 const EmployeeAndEquipmentList = () => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
+  const [employeeData, setEmployeeData] = useState(null);
   const [equipmentData, setEquipmentData] = useState(null);
  
   /*TO-DO: Fix the Toggle
@@ -52,12 +52,11 @@ const EmployeeAndEquipmentList = () => {
     }).then((res) => res.json());
   }
 
-
   const handleDeleteEmployee = (id) => {
     deleteEmployee(id).catch((err) => {
       console.log(err);
     });
-    setData((employees) => {
+    setEmployeeData((employees) => {
       return employees.filter((employee) => employee._id !== id);
     });
   };
@@ -75,22 +74,34 @@ const EmployeeAndEquipmentList = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetchEmployees(controller.signal)
+    const getAllEmployees = fetchEmployees(controller.signal)
       .then((employees) => {
         setLoading(false);
-        setData(employees);
+        const employeeData = employees;
+        return employeeData;
+      })
+
+    const getAllEquipmentItem = fetchEquipment(controller.signal)
+      .then((equipment) => {
+        setLoading(false);
+        setEquipmentData(equipment);
       })
       .catch((error) => {
         if (error.name !== "AbortError") {
-          setData(null);
+          setEquipmentData(null);
           throw error;
         }
+      });
+
+      Promise.all([getAllEmployees, getAllEquipmentItem]).then((values) => {
+        setEmployeeData(values[0])
+        console.log(values);
       });
 
     return () => controller.abort();
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const controller = new AbortController();
 
     fetchEquipment(controller.signal)
@@ -106,7 +117,7 @@ const EmployeeAndEquipmentList = () => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, []); */
 
   if (loading) {
     return <Loading />;
@@ -115,9 +126,9 @@ const EmployeeAndEquipmentList = () => {
   return ( 
     <>
       <EmployeeTable 
-        employees={data} 
+        employees={employeeData} 
         onDeleteEmp={handleDeleteEmployee}
-        setData={setData}
+        setEmployeeData={setEmployeeData}
         changeAttendence={changeAttendence}/>
 
       <EquipmentTable 
