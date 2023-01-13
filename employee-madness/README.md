@@ -15,10 +15,14 @@ Copy the .env.sample as .env and fill up the environment variable for your perso
 
 ```bash
 cd ./server
-npm run populate
+npm run populateEmployees
+npm run populateEquipment
 ```
 
-**populate command** will run the populate.js file as a script and it will generate a buch of starter data for your database. 
+**the populateEmployees command** will run the populateEmployees.js file as a script and it will generate a buch of starter data for your database.
+
+**the populateEquipment command** will run the populateEmployees.js file as a script and it will generate a buch of starter data for your database.
+
 
 ### Running the code
 

@@ -34,7 +34,7 @@
 
      You need to fetch the equipments in the update page.
 
-## Create a pagination at the bottom of the screen, so only 10 employees are visible at once.
+## OPTIONAL: Create a pagination at the bottom of the screen, so only 10 employees are visible at once.
 
     There is pagination at the bottom of the screen.
     The pagination number increases by 1 after every 10th employee. So you can see only 10 employees at once. 

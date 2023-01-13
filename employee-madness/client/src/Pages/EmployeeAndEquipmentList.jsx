@@ -3,8 +3,10 @@ import Loading from "../Components/Loading";
 import EmployeeTable from "../Components/EmployeeTable";
 import EquipmentTable from "../Components/EquipmentTable/EquipmentTable";
 
-const fetchEmployees = (signal) => {
-  return fetch("/api/employees", { signal }).then((res) => res.json());
+const fetchEmployees = async (/* signal */) => {
+  const employeeData = await fetch("/api/employees" /* { signal } */);
+  const employeeResult = await employeeData.json();
+  return employeeResult;
 };
 
 const deleteEmployee = (id) => {
@@ -13,10 +15,10 @@ const deleteEmployee = (id) => {
   );
 };
 
-const fetchEquipment = async (signal) => {
-  const fetchEquipData = await fetch("/api/equipment", { signal })
-  const equipDataResult = await fetchEquipData.json();
-  return equipDataResult;
+const fetchEquipment = async () => {
+  const equipmentData = await fetch("/api/equipment");
+  const equipmentResult = await equipmentData.json();
+  return equipmentResult;
 };
 
 const deleteEquipment = (id) => {

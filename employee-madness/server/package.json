@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "populate": "node ./populate/populate.js",
-    "equip": "node ./equip/equip.js",
+    "populateEmployees": "node ./populateEmployees/populateEmployees.js",
+    "populateEquipment": "node ./populateEquipment/populateEquipment.js",
     "format": "prettier -w ."
   },
   "keywords": [],
