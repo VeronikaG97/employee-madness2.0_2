@@ -68,7 +68,7 @@ const EmployeeAndEquipmentList = () => {
       console.log(err);
     });
     setEquipmentData((equipmentItem) => {
-      return equipmentItem.filter((equipItem) => equipItem._id !== id);
+      return equipmentItem.filter((equipmentItem) => equipmentItem._id !== id);
     });
   };
 
@@ -94,9 +94,9 @@ const EmployeeAndEquipmentList = () => {
     const controller = new AbortController();
 
     fetchEquipment(controller.signal)
-      .then((equipmentItem) => {
+      .then((equipment) => {
         setLoading(false);
-        setEquipmentData(equipmentItem);
+        setEquipmentData(equipment);
       })
       .catch((error) => {
         if (error.name !== "AbortError") {
