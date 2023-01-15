@@ -36,6 +36,8 @@ const EmployeeAndEquipmentList = () => {
       -> try a useState (map in in EmployeeTable so that every 
          employee has their own useState)
       -> try to set checkbox value to useState and reade here in changeAttendence the value/use vale for the "PUT-Body"
+ 
+        Fix Proxy-Error
   */
   const changeAttendence = async (id, attendence) => {
     attendence = !attendence
@@ -43,7 +45,7 @@ const EmployeeAndEquipmentList = () => {
       method: "PUT",
       headers: 
       {
-      "Content-Type": "application/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(
       {
@@ -102,24 +104,6 @@ const EmployeeAndEquipmentList = () => {
 
     return () => controller.abort();
   }, []);
-
-  /* useEffect(() => {
-    const controller = new AbortController();
-
-    fetchEquipment(controller.signal)
-      .then((equipment) => {
-        setLoading(false);
-        setEquipmentData(equipment);
-      })
-      .catch((error) => {
-        if (error.name !== "AbortError") {
-          setEquipmentData(null);
-          throw error;
-        }
-      });
-
-    return () => controller.abort();
-  }, []); */
 
   if (loading) {
     return <Loading />;
