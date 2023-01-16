@@ -18,8 +18,8 @@ const fetchEmployee = (id) => {
   return fetch(`/api/employees/${id}`).then((res) => res.json());
 };
 
-const fetchEquipment = (id) => {
-  return fetch(`/api/equipment/${id}`).then((res) => res.json());
+const fetchEquipment = () => {
+  return fetch(`/api/equipment/`).then((res) => res.json());
 };
 
 const EmployeeUpdater = () => {
@@ -31,8 +31,34 @@ const EmployeeUpdater = () => {
   const [employeeLoading, setEmployeeLoading] = useState(true);
   const [equipment, setEquipment] = useState(null);
 
+ /*  useEffect(() => {
+    setEmployeeLoading(true);
+
+
+    fetchEmployee(id)
+      .then((employee) => {
+        setEmployeeLoading(false);
+      });
+
+    fetchEquipment();
+
+    Promise.all([fetchEmployee, fetchEquipment]).then((values) => {
+        setEmployee(values[0]);
+        setEquipment(values[1]);
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }, [id]); */
+
   useEffect(() => {
     setEmployeeLoading(true);
+    
+    fetchEquipment()
+    .then((equipmentItems) => {
+      setEquipment(equipmentItems)
+    })
+
     fetchEmployee(id)
       .then((employee) => {
         setEmployee(employee);
@@ -41,9 +67,6 @@ const EmployeeUpdater = () => {
       .catch((error) => {
         throw error;
       });
-
-
-      
   }, [id]);
 
   const handleUpdateEmployee = (employee) => {
@@ -70,6 +93,7 @@ const EmployeeUpdater = () => {
       onSave={handleUpdateEmployee}
       disabled={updateLoading}
       onCancel={() => navigate("/")}
+      equipment={equipment}
     />
   );
 };
