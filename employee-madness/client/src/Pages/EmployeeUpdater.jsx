@@ -31,38 +31,25 @@ const EmployeeUpdater = () => {
   const [employeeLoading, setEmployeeLoading] = useState(true);
   const [equipment, setEquipment] = useState(null);
 
- /*  useEffect(() => {
-    setEmployeeLoading(true);
-
-
-    fetchEmployee(id)
-      .then((employee) => {
-        setEmployeeLoading(false);
-      });
-
-    fetchEquipment();
-
-    Promise.all([fetchEmployee, fetchEquipment]).then((values) => {
-        setEmployee(values[0]);
-        setEquipment(values[1]);
-      })
-      .catch((error) => {
-        throw error;
-      });
-  }, [id]); */
-
   useEffect(() => {
     setEmployeeLoading(true);
     
-    fetchEquipment()
+    const getEquipment = fetchEquipment()
     .then((equipmentItems) => {
-      setEquipment(equipmentItems)
+      const equipmentData = equipmentItems;
+      return equipmentData;
     })
 
-    fetchEmployee(id)
+    const getEmployees = fetchEmployee(id)
       .then((employee) => {
-        setEmployee(employee);
         setEmployeeLoading(false);
+        const employeeData = employee
+        return employeeData;
+      })
+
+      Promise.all([getEquipment, getEmployees]).then((values) => {
+        setEquipment(values[0]);
+        setEmployee(values[1]);
       })
       .catch((error) => {
         throw error;
