@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
 import FilterEmployees from "../FilterEmployees";
-import SortEmployees from "../SortEmployees"
+import SortEmployees from "../SortEmployees";
 
 const EmployeeTable = ({ employees, onDeleteEmp, setEmployeeData, changeAttendence }) => {
   return (
@@ -36,7 +36,7 @@ const EmployeeTable = ({ employees, onDeleteEmp, setEmployeeData, changeAttenden
                       </button>
                     </td>
                     <td> <label htmlFor="attendence" >attendent</label>
-                      <input name="attendence" type="checkbox"
+                      <input name="attendence" type="checkbox" 
                         onClick={
                           () => {
                             changeAttendence(employee._id, employee.attendence);

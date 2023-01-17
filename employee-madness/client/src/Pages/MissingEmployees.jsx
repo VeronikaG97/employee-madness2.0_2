@@ -33,7 +33,7 @@ const MissingEmployees = () => {
         <div>
             <h1> missing Employees</h1>
             {
-              attendantEmployees !== undefined 
+              attendantEmployees !== undefined && attendantEmployees !== false
               ? 
                 <ul>
                   {attendantEmployees.map((employee) => (
