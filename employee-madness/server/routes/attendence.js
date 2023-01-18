@@ -8,12 +8,13 @@ routerAttendence.get("/missing", async (req, res) => {
     return missingEmployees;
 });
 
-routerAttendence.put("/:id", async (req, res, next) => {
+routerAttendence.patch("/:id", async (req, res, next) => {
     Employee.findByIdAndUpdate({_id: req.params.id}, req.body)
       .then(() => {
           Employee.findOne({_id: req.params.id})
           .then((employee) => {
               console.log(employee);
+              return res.json(employee);
           });
       });
   });
