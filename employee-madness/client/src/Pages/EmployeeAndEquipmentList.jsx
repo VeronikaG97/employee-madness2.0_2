@@ -4,7 +4,7 @@ import EmployeeTable from "../Components/EmployeeTable";
 import EquipmentTable from "../Components/EquipmentTable/EquipmentTable";
 
 const fetchEmployees = async (/* signal */) => {
-  const employeeData = await fetch("/api/employees" /* { signal } */);
+  const employeeData = await fetch("/api/employees", /* {signal} */);
   const employeeResult = await employeeData.json();
   return employeeResult;
 };
@@ -15,8 +15,8 @@ const deleteEmployee = (id) => {
   );
 };
 
-const fetchEquipment = async () => {
-  const equipmentData = await fetch("/api/equipment");
+const fetchEquipment = async (/* signal */) => {
+  const equipmentData = await fetch("/api/equipment", /* {signal} */);
   const equipmentResult = await equipmentData.json();
   return equipmentResult;
 };
@@ -32,26 +32,27 @@ const EmployeeAndEquipmentList = () => {
   const [employeeData, setEmployeeData] = useState(null);
   const [equipmentData, setEquipmentData] = useState(null);
  
-  /*TO-DO: Fix the Toggle
-      -> try a useState (map in in EmployeeTable so that every 
-         employee has their own useState)
-      -> try to set checkbox value to useState and reade here in changeAttendence the value/use vale for the "PUT-Body"
- 
-        Fix Proxy-Error
-  */
   const changeAttendence = async (id, attendence) => {
-    attendence = !attendence
-    return fetch(`/api/attendence/${id}`, {
-      method: "PUT",
+    let updatedAttendence = !attendence;
+    await fetch(`/api/attendence/${id}`, {
+      method: "PATCH",
       headers: 
       {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(
       {
-        attendence: attendence
+        attendence: updatedAttendence
       })
-    }).then((res) => res.json());
+    });
+
+    setEmployeeData(employeeData.map(employee => {
+      if (employee._id === id) {
+        return { ...employee, attendence: updatedAttendence}
+      } else {
+        return employee;
+      }
+    }))
   }
 
   const handleDeleteEmployee = (id) => {
@@ -74,16 +75,16 @@ const EmployeeAndEquipmentList = () => {
   };
 
   useEffect(() => {
-    const controller = new AbortController();
+   /*  const controller = new AbortController(); */
 
-    const getAllEmployees = fetchEmployees(controller.signal)
+    const getAllEmployees = fetchEmployees(/* controller.signal */)
       .then((employees) => {
         setLoading(false);
         const employeeData = employees;
         return employeeData;
     });
 
-    const getAllEquipmentItem = fetchEquipment(controller.signal)
+    const getAllEquipmentItem = fetchEquipment(/* controller.signal */)
       .then((equipment) => {
         setLoading(false);
         const equipmentData = equipment;
@@ -102,7 +103,7 @@ const EmployeeAndEquipmentList = () => {
       }
     });
 
-    return () => controller.abort();
+    /* return () => controller.abort(); */
   }, []);
 
   if (loading) {

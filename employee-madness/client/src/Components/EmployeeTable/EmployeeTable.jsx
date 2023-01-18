@@ -36,11 +36,10 @@ const EmployeeTable = ({ employees, onDeleteEmp, setEmployeeData, changeAttenden
                       </button>
                     </td>
                     <td> <label htmlFor="attendence" >attendent</label>
-                      <input name="attendence" type="checkbox" 
-                        onClick={
-                          () => {
-                            changeAttendence(employee._id, employee.attendence);
-                          }}>
+                      <input name="attendence" type="checkbox" checked={employee.attendence}
+                        onChange={
+                          () => changeAttendence(employee._id, employee.attendence)
+                        }>
                       </input>
                     </td>
                   </tr>
